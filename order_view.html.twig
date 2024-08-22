@@ -1,0 +1,148 @@
+
+<style>
+    .date-selection{
+        font-size: 22px;
+        color: black;
+        margin-top: 7px;
+    }
+    .time-selection{
+        font-size: 22px;
+        color: black;
+        margin-top: 7px;
+    }
+    .time-interval{
+        text-align: center;
+        font-size: 17px;
+        margin-top: 10px;
+    }
+    .date-from-to{
+        display: flex;
+        justify-content: space-around;
+        margin-top: 14px;
+    }
+    .time-from-to{
+        display: flex;
+        justify-content: space-around;
+        margin-top: 14px;
+    }
+    .from{
+        font-size: 20px;
+        margin-left: 33%;
+    }
+    .to{
+        font-size: 20px;
+        margin-left: 33%;
+    }
+    .between{
+        margin-top: 14px;
+        font-size: 20px;
+    }
+    #element-control {
+        margin-bottom: 3rem;
+    }
+    #element-control label {
+        font: normal normal normal 20px/2.4em futura-lt-w01-light,futura-lt-w05-light,sans-serif;
+        color: black;
+    }
+    .dateTimePicker{
+        display: block;
+        width: 13em;
+        height: 2.0em;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        margin-top: 10px;
+        border-radius: 7px;
+    }
+    .date-to{
+        margin-top: 22px;
+    }
+</style>
+<div id="wk-wix-eds">
+    <div id="element-control">
+        <div class="date-selection">Date Selection</div>
+        <div class="date-from-to">
+            <div class="date-from">
+                <div class="from">From</div>
+                <input type="text" id="dateFrom" class="dateTimePicker" name="dateFrom" placeholder="Select Month and Year">
+            </div>
+            <div class="date-to">
+                {# <div class="to">To</div> #}
+                <input type="text" id="dateTo" class="dateTimePicker" name="dateTo" placeholder="Select Month and Year">
+                <p id="error-message" style="color: red;font-size: 11px;"></p>
+            </div>
+        </div>
+    </div>
+    <div id="element-control">
+        <div class="time-selection">Time Selection</div>
+        <div class="time-interval">Select Time interval from the given intervals:</div>
+        <div class="time-from-to">
+            <div class="time-from">
+                <select value="" id="custom_form_time_from_when" name="time_from_when[]" class="dateTimePicker"  placeholder="Select Time From When">
+                    <option value="{{ 'select_time_from'|trans }}">{{ 'select_time_from'|trans }}</option>
+                    <option value="08:30">08:30</option>
+                    <option value="09:00">09:00</option>
+                    <option value="09:30">09:30</option>
+                </select>
+                {# <input type="text" id="timeFrom" class="dateTimePicker" name="timeFrom" placeholder="Select Time From When"> #}
+            </div>
+            <div class="between">To</div>
+            <div class="time-to">
+                <select value="{{ 'select_time_from'|trans }}" id="custom_form_time_till_when" name="custom_form[time_till_when][]" class="dateTimePicker" placeholder="Select Time Till When">
+                    <option value="{{ 'select_time_till'|trans }}">{{ 'select_time_till'|trans }}</option>
+                    <option value="09:30">09:30</option>
+                    <option value="10:00">10:00</option>
+                    <option value="10:30">10:30</option>
+                </select>
+                {# <input type="text" id="timeTo" class="dateTimePicker" name="timeTo" placeholder="Select Time Till When"> #}
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+
+<script>
+
+            flatpickr('.dateTimePicker', {
+                dateFormat: 'Y-m-d',  // Change this format as needed
+                minDate: 'today',    // Restrict past dates
+                maxDate: new Date().fp_incr(30), // Restrict future dates
+                onChange: function(selectedDates, dateStr, instance) {
+                    console.log("Selected date: " + dateStr);
+                }
+            });
+   
+
+//     console.log("hello");
+//     // Initialize Flatpickr for the "From Date" input
+//     const dateFromInput = document.getElementById('dateFrom');
+//     const dateToInput = document.getElementById('dateTo');
+
+//     const dateFromPicker = flatpickr(dateFromInput, {
+//         dateFormat: "d-m-Y",
+//         onChange: function(selectedDates, dateStr, instance) {
+//             if (selectedDates.length > 0) {
+//                 const fromDate = selectedDates[0];
+//                 dateToPicker.set('minDate', fromDate);
+//                 if (dateToPicker.selectedDates.length > 0 && dateToPicker.selectedDates[0] < fromDate) {
+//                     dateToPicker.setDate(fromDate);
+//                 }
+//             }
+//         }
+//     });
+
+//     // Initialize Flatpickr for the "To Date" input
+//     const dateToPicker = flatpickr(dateToInput, {
+//         dateFormat: "d-m-Y",
+//         minDate: dateFromPicker.selectedDates[0] || "today",
+//     });
+</script>
+{# <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> #}
+{# <script src="http://127.0.0.1:8000/js/Wix/EstimatedDeliverySlot/script.js"></script> #}
